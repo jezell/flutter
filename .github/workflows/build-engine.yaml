@@ -29,11 +29,15 @@ jobs:
           # fetch-depth: 0 (if you need full history)
           fetch-depth: 0
 
+      - name:
+        run: |
+          cp engine/scripts/rbe.gclient .gclient
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y curl python3 python3-pip python3-setuptools git clang cmake ninja-build pkg-config
-          
+
           # Clone depot_tools to get gclient, gn, ninja, etc.
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
           echo "::add-path::$HOME/depot_tools"
@@ -77,12 +81,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name:
+        run: |
+          cp engine/scripts/rbe.gclient .gclient
+
       - name: Install dependencies
         run: |
           choco install python --version=3.9.0 -y
           choco install visualstudio2022buildtools -y
           choco install cmake ninja git -y
-          
+
           # Set up depot_tools
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git C:\depot_tools
           echo "C:\\depot_tools" >> $env:GITHUB_PATH
@@ -116,17 +124,21 @@ jobs:
       - name: Set Actions Allow Unsecure Commands
         run: |
           echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
-      
+
       - name: Check out Flutter repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
+      - name:
+        run: |
+          cp engine/scripts/rbe.gclient .gclient
+
       - name: Install dependencies
         run: |
           brew update
           brew install python git ninja cmake
-          
+
           # depot_tools
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
           echo "::add-path::$HOME/depot_tools"
@@ -169,11 +181,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name:
+        run: |
+          cp engine/scripts/rbe.gclient .gclient
+
       - name: Install dependencies
         run: |
           brew update
           brew install python git ninja cmake
-          
+
           # depot_tools
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
           echo "::add-path::$HOME/depot_tools"
@@ -217,14 +233,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name:
+        run: |
+          cp engine/scripts/rbe.gclient .gclient
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y curl python3 python3-pip python3-setuptools git clang cmake ninja-build pkg-config default-jdk
-          
+
           # Android SDK/NDK setup if needed
           # e.g., install a specific NDK version, set environment variables, etc.
-          
+
           # depot_tools
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
           echo "::add-path::$HOME/depot_tools"
@@ -262,17 +282,21 @@ jobs:
       - name: Set Actions Allow Unsecure Commands
         run: |
           echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
-          
+
       - name: Check out Flutter repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
+      - name:
+        run: |
+          cp engine/scripts/rbe.gclient .gclient
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y curl python3 python3-pip python3-setuptools git clang cmake ninja-build pkg-config
-          
+
           # depot_tools
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
           echo "::add-path::$HOME/depot_tools"
