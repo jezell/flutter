@@ -118,7 +118,7 @@ jobs:
         run: curl -fsSL https://raw.githubusercontent.com/kou/arrow/e49d8ae15583ceff03237571569099a6ad62be32/ci/scripts/util_free_space.sh | bash
 
       - name: Check out the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
@@ -213,6 +213,7 @@ jobs:
 
 
   build-release:
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
@@ -235,10 +236,10 @@ jobs:
           python-version: '3.13'
 
       - name: Check out the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: build ios release
-      - run: |
+        run: |
 
           gcloud storage cp --recursive gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}
 
