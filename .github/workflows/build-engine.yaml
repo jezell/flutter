@@ -67,6 +67,32 @@ jobs:
             config_name: ci/ios_release
             os: macos-latest
 
+          - name: ios debug extension safe
+            config_name: ci/ios_debug_extension_safe
+            os: macos-latest
+
+          - name: ios debug sim arm64 extension safe
+            config_name: ci/ios_debug_sim_arm64_extension_safe
+            os: macos-latest
+
+          - name: ios debug sim extension safe
+            config_name: ci/ios_debug_sim_extension_safe
+            os: macos-latest
+
+          - name: ios debug unopt sim arm64 extension safe
+            config_name: ci/ios_debug_unopt_sim_arm64_extension_safe
+            os: macos-latest
+
+          - name: ios profile extension safe
+            config_name: ci/ios_profile_extension_safe
+            os: macos-latest
+
+          - name: ios release extension safe
+            config_name: ci/ios_release_extension_safe
+            os: macos-latest
+
+
+
           # ------------------------- WINDOWS BUILDS -------------------------
 
           # Engine tool doesn't currently support windows
@@ -182,5 +208,52 @@ jobs:
       - name: Copy Engine
         run: |
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
-          gcloud storage cp --recursive engine/src/out/${{ matrix.config_name }}/*.* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}/
+          tar c engine/src/out/${{ matrix.config_name }} | gzip > ${{ matrix.config_name }}.tar.gz
+          gcloud storage cp --recursive ${{ matrix.config_name }}.tar.gz gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}.tar.gz
 
+
+  build-release:
+
+    steps:
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
+
+      - name: Setup gcloud
+        env:
+          GCP_CREDENTIALS: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
+        run: |
+          echo "$GCP_CREDENTIALS"  | base64 -d  > "$HOME"/gcloud.json
+          gcloud auth activate-service-account --key-file="$HOME"/gcloud.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: build ios release
+      - run: |
+
+          gcloud storage cp --recursive gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}
+
+          tar -xvzf ci/ios_debug_sim.tar.xz
+          tar -xvzf ci/ios_release.tar.xz
+          tar -xvzf ci/ios_debug_sim_arm64.tar.xz
+          tar -xvzf ci/ios_release_extension_safe.tar.xz
+          tar -xvzf ci/ci/ios_debug_extension_safe
+          tar -xvzf ci/ios_debug_sim_arm64_extension_safe.tar.xz
+          tar -xvzf ci/ios_debug_unopt_sim_arm64_extension_safe.tar.xz
+          tar -xvzf ci/ios_debug_sim_extension_safe
+          tar -xvzf ci/ios_profile_extension_safe.tar.xz
+          tar -xvzf ci/ios_release_extension_safe.tar.xz
+
+          python3 flutter/sky/tools/create_ios_framework.py
+          --dst out/ci/release
+          --arm64-out-dir out/ci/ios_release
+          --simulator-x64-out-dir out/ci/ios_debug_sim
+          --simulator-arm64-out-dir out/ci/ios_debug_sim_arm64
+          --dsym
+          --strip
