@@ -1,0 +1,160 @@
+name: Build Flutter Engine with Engine Tool (Matrix)
+
+on:
+  push:
+    branches: [ "main", "stable", "beta" ]
+  pull_request:
+    branches: [ "main", "stable", "beta" ]
+env:
+  # don't try to install google's internal copy of visual studio
+  DEPOT_TOOLS_WIN_TOOLCHAIN: 0
+
+jobs:
+  build-engine:
+    # We'll run on whatever OS the matrix entry specifies.
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        include:
+          # ------------------------- LINUX BUILDS -------------------------
+          # host_debug, host_debug_unopt, host_profile, host_release, wasm_debug_unopt, wasm_release,
+
+          - name: Linux host release
+            config_name: host_release
+            os: ubuntu-latest
+
+          - name: Linux wasm release (web)
+            config_name: wasm_release
+            os: ubuntu-latest
+
+          - name: Linux host debug
+            config_name: host_debug
+            os: ubuntu-latest
+
+          - name: Linux wasm debug (web)
+            config_name: wasm_debug_unopt
+            os: ubuntu-latest
+
+         # ------------------------- MAC BUILDS -------------------------
+          - name: Mac host release
+            config_name: host_release
+            os: macos-latest
+
+          - name: iOS release
+            config_name: ios_release
+            os: macos-latest
+
+          - name: Mac host debug
+            config_name: host_debug
+            os: macos-latest
+
+          - name: iOS debug
+            config_name: ios_debug
+            os: macos-latest
+          # ------------------------- WINDOWS BUILDS -------------------------
+
+          # Engine tool doesn't currently support windows
+          #- name: Windows host release
+          #  config_name: host_release
+          #  os: windows-latest
+
+    steps:
+      - name: Free disk space
+        if: startsWith(matrix.os, 'ubuntu')
+        run: curl -fsSL https://raw.githubusercontent.com/kou/arrow/e49d8ae15583ceff03237571569099a6ad62be32/ci/scripts/util_free_space.sh | bash
+
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Dependencies (Example for Linux)
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            clang \
+            cmake \
+            ninja-build \
+            unzip \
+            zip \
+            xz-utils \
+            libgtk-3-dev \
+            libglu-dev
+
+      - name: Install Dependencies (Example for macOS)
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          brew update
+          brew install \
+            cmake \
+            ninja
+
+      - name: Install Dependencies (Example for Windows)
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          choco install -y -v \
+            cmake \
+            ninja
+
+      - name: Set up depot_tools / gclient
+        run: |
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
+          # Append depot_tools to the PATH for subsequent steps
+          echo "$HOME/depot_tools" >> $GITHUB_PATH
+
+      - name: Gclient Sync
+        if: startsWith(matrix.os, 'ubuntu') && contains(matrix.config_name, 'wasm')
+        run: |
+          # Use custom gclient to trim size
+          cp engine/scripts/slim-linux-web.gclient .gclient
+          gclient sync -D
+
+      - name: Gclient Sync
+        if: startsWith(matrix.os, 'ubuntu') && contains(matrix.config_name, 'android')
+        run: |
+          # Use custom gclient to trim size
+          cp engine/scripts/slim-linux-android.gclient .gclient
+          gclient sync -D
+
+      - name: Gclient Sync
+        if: startsWith(matrix.os, 'ubuntu') && contains(matrix.config_name, 'host')
+        run: |
+          # Use custom gclient to trim size
+          cp engine/scripts/slim-linux-desktop.gclient .gclient
+          gclient sync -D
+
+      - name: Gclient Sync
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          # Use custom gclient to trim size
+          cp engine/scripts/slim-mac.gclient .gclient
+          gclient sync -D
+
+      - name: Gclient Sync
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          # Use custom gclient to trim size
+          cp engine/scripts/slim-windows.gclient .gclient
+          gclient sync -D
+
+      - name: Fetch engine dependencies
+        run: |
+          cd engine/src
+          ./flutter/bin/et fetch
+
+      - name: Build Engine
+        run: |
+          echo "Building config: ${{ matrix.config_name }}"
+          cd engine/src
+          ./flutter/bin/et build --config ${{ matrix.config_name }}
+
+      - name: Copy Engine
+        run: |
+          gcloud storage cp out --recursive thumbnails gs://flutter-builds/${{ github.sha }}
+          gcloud storage buckets update gs://flutter-builds
