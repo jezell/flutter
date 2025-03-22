@@ -205,7 +205,17 @@ jobs:
           cd engine/src
           ./flutter/bin/et build --config ${{ matrix.config_name }}
 
-      - name: Copy Engine
+      - name: Copy Zip Archives
+        if: ${{ hashFiles('engine/src/out/${{ matrix.config_name }}/zip_archives/') != '' }}
+        run: |
+          cd engine/src
+          echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
+
+          gcloud storage cp --recursive out/${{ matrix.config_name }}/zip_archives/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/{{ matrix.config_name }}
+
+
+      - name: Copy Engine Outputs
+        if: ${{ hashFiles('engine/src/out/${{ matrix.config_name }}/zip_archives/') == '' }}
         run: |
           cd engine/src
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
@@ -245,16 +255,16 @@ jobs:
 
           gcloud storage cp --recursive gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }} .
 
-          tar -xvzf ci/ios_debug_sim.tar.xz
-          tar -xvzf ci/ios_release.tar.xz
-          tar -xvzf ci/ios_debug_sim_arm64.tar.xz
-          tar -xvzf ci/ios_release_extension_safe.tar.xz
-          tar -xvzf ci/ci/ios_debug_extension_safe
-          tar -xvzf ci/ios_debug_sim_arm64_extension_safe.tar.xz
-          tar -xvzf ci/ios_debug_unopt_sim_arm64_extension_safe.tar.xz
-          tar -xvzf ci/ios_debug_sim_extension_safe
-          tar -xvzf ci/ios_profile_extension_safe.tar.xz
-          tar -xvzf ci/ios_release_extension_safe.tar.xz
+          tar -xvzf ci/ios_debug_sim.tar.gz
+          tar -xvzf ci/ios_release.tar.gz
+          tar -xvzf ci/ios_debug_sim_arm64.tar.gz
+          tar -xvzf ci/ios_release_extension_safe.tar.gz
+          tar -xvzf ci/ios_debug_extension_safe.tar.gz
+          tar -xvzf ci/ios_debug_sim_arm64_extension_safe.tar.gz
+          tar -xvzf ci/ios_debug_unopt_sim_arm64_extension_safe.tar.gz
+          tar -xvzf ci/ios_debug_sim_extension_safe.tar.gz
+          tar -xvzf ci/ios_profile_extension_safe.tar.gz
+          tar -xvzf ci/ios_release_extension_safe.tar.gz
 
           python3 flutter/sky/tools/create_ios_framework.py
           --dst out/ci/release
@@ -263,3 +273,6 @@ jobs:
           --simulator-arm64-out-dir out/ci/ios_debug_sim_arm64
           --dsym
           --strip
+
+          gcloud storage cp --recursive out/ios_release.tar.gz gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/release
+
