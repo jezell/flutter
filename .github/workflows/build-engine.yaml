@@ -208,11 +208,12 @@ jobs:
       - name: Copy Engine
         run: |
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
-          tar c engine/src/out/${{ matrix.config_name }} | gzip > ${{ matrix.config_name }}.tar.gz
-          gcloud storage cp --recursive ${{ matrix.config_name }}.tar.gz gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}.tar.gz
+          tar c engine/src/out/${{ matrix.config_name }} | gzip > out/${{ matrix.config_name }}.tar.gz
+          gcloud storage cp --recursive out/${{ matrix.config_name }}.tar.gz gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}.tar.gz
 
 
   build-release:
+    needs: build-engine
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -241,7 +242,7 @@ jobs:
       - name: build ios release
         run: |
 
-          gcloud storage cp --recursive gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}
+          gcloud storage cp --recursive gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }} .
 
           tar -xvzf ci/ios_debug_sim.tar.xz
           tar -xvzf ci/ios_release.tar.xz
