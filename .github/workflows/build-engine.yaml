@@ -47,6 +47,25 @@ jobs:
             config_name: host_debug
             os: macos-latest
 
+          - name: ios debug
+            config_name: ci/ios_debug
+            os: macos-latest
+
+          - name: ios debug sum
+            config_name: ci/ios_debug_sim
+            os: macos-latest
+
+          - name: ios debug sim arm64
+            config_name: ci/ios_debug_sim_arm64
+            os: macos-latest
+
+          - name: ios profile
+            config_name: ci/ios_profile
+            os: macos-latest
+
+          - name: ios release
+            config_name: ci/ios_release
+            os: macos-latest
 
           # ------------------------- WINDOWS BUILDS -------------------------
 
@@ -162,6 +181,6 @@ jobs:
 
       - name: Copy Engine
         run: |
-          echo "copying engine zip archives to /flutter_infra_release/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
-          gcloud storage cp engine/src/out/${{ matrix.config_name }}/zip_archives/*.* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}/
+          echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
+          gcloud storage cp --recursive engine/src/out/${{ matrix.config_name }}/*.* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}/
 
