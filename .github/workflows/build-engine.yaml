@@ -43,17 +43,11 @@ jobs:
             config_name: host_release
             os: macos-latest
 
-          - name: iOS release
-            config_name: ios_release
-            os: macos-latest
-
           - name: Mac host debug
             config_name: host_debug
             os: macos-latest
 
-          - name: iOS debug
-            config_name: ios_debug
-            os: macos-latest
+
           # ------------------------- WINDOWS BUILDS -------------------------
 
           # Engine tool doesn't currently support windows
