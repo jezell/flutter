@@ -213,6 +213,8 @@ jobs:
 
 
   build-release:
+    run:
+      shell: bash
 
     steps:
       - name: 'Set up Cloud SDK'
