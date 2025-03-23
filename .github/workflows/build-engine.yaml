@@ -39,27 +39,27 @@ jobs:
             config_name: wasm_debug_unopt
             os: ubuntu-latest
 
-          - name: Android Profile
+          - name: android profile
             os: ubuntu-latest
             config_name: ci/android_profile
 
-          - name: Android Profile arm64
+          - name: android profile arm64
             os: ubuntu-latest
             config_name: ci/android_profile_arm64
 
-          - name: Android Profile x64
+          - name: android profile x64
             os: ubuntu-latest
             config_name: ci/android_profile_x64
 
-          - name: Android Release
+          - name: android release
             os: ubuntu-latest
             config_name:  ci/android_release
 
-          - name: Android Release Arm64
+          - name: android release arm64
             os: ubuntu-latest
             config_name: ci/android_release_arm64
 
-          - name: Android Release x64
+          - name: android release x64
             os: ubuntu-latest
             config_name: ci/android_release_x64
 
