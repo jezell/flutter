@@ -233,7 +233,7 @@ jobs:
           ./flutter/bin/et build --config ${{ matrix.config_name }}
 
       - name: Copy Zip Archives
-        if: ${{ hashFiles('engine/src/out/${{ matrix.config_name }}/zip_archives/*') != '' }}
+        if: ${{ hashFiles('engine/src/out/' + matrix.config_name + '/zip_archives/**') != ''}}
         run: |
           cd engine/src
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
@@ -242,7 +242,7 @@ jobs:
 
 
       - name: Copy Engine Outputs
-        if: ${{ hashFiles('engine/src/out/${{ matrix.config_name }}/zip_archives/*') == '' }}
+        if: ${{ hashFiles('engine/src/out/' + matrix.config_name + '/zip_archives/**') == '' }}
         run: |
           cd engine/src
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
