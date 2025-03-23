@@ -488,6 +488,14 @@ jobs:
           cd engine/src
           ./flutter/bin/et fetch
 
+      - name: build web engine for web_tests
+        if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'web_tests')
+        run: |
+          echo "Running web engine build: ${{ matrix.config_name }}"
+          cd engine/src
+          ./flutter/bin/et build --config wasm_debug_unopt
+          ./flutter/bin/et build --config wasm_release
+
       - name: Build Engine
         run: |
           echo "Running et config: ${{ matrix.config_name }}"
