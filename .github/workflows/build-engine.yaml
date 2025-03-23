@@ -443,6 +443,8 @@ jobs:
           # Use custom gclient to trim size
           cp engine/scripts/slim-linux-web.gclient .gclient
           gclient sync -D
+          cd engine/src
+          ./flutter/tools/gn --unoptimized
 
       - name: gclient sync wasm
         if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'wasm')
