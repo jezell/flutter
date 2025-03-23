@@ -18,9 +18,8 @@ jobs:
         shell: bash
     strategy:
       matrix:
+        max-parallel: 10
         include:
-          # ------------------------- LINUX BUILDS -------------------------
-          # host_debug, host_debug_unopt, host_profile, host_release, wasm_debug_unopt, wasm_release,
 
           - name: linux host release
             os: depot-ubuntu-22.04-2
