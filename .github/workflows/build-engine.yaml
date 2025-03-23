@@ -489,7 +489,7 @@ jobs:
           ./flutter/bin/et fetch
 
       - name: Build Engine
-        un: |
+        run: |
           echo "Running et config: ${{ matrix.config_name }}"
           cd engine/src
           ./flutter/bin/et build --config ${{ matrix.config_name }}
