@@ -22,20 +22,20 @@ jobs:
           # ------------------------- LINUX BUILDS -------------------------
           # host_debug, host_debug_unopt, host_profile, host_release, wasm_debug_unopt, wasm_release,
 
-          - name: Linux host release
+          - name: linux host release
             config_name: ci/host_release
             os: ubuntu-latest
 
-          - name: Linux host debug
+          - name: linux host debug
             config_name: ci/host_debug
             os: ubuntu-latest
 
 
-          - name: Linux wasm release (web)
+          - name: linux wasm release (web)
             config_name: wasm_release
             os: ubuntu-latest
 
-          - name: Linux wasm debug (web)
+          - name: linux wasm debug (web)
             config_name: wasm_debug_unopt
             os: ubuntu-latest
 
@@ -64,11 +64,11 @@ jobs:
             config_name: ci/android_release_x64
 
          # ------------------------- MAC BUILDS -------------------------
-          - name: Mac host release
+          - name: mac host release
             config_name: ci/host_release
             os: macos-latest
 
-          - name: Mac host debug
+          - name: mac host debug
             config_name: ci/host_debug
             os: macos-latest
 
@@ -194,6 +194,8 @@ jobs:
       - name: gclient sync android
         if: startsWith(matrix.os, 'ubuntu') && contains(matrix.config_name, 'android')
         run: |
+          engine/src/build/linux/sysroot_scripts/install-sysroot.py --arch=x64
+
           # Use custom gclient to trim size
           cp engine/scripts/slim-linux-android.gclient .gclient
           gclient sync -D
