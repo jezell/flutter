@@ -23,22 +23,22 @@ jobs:
         include:
 
           - name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
-            os: depot-ubuntu-22.04-2
+            os: depot-ubuntu-22.04-8
             config_name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
           - name: web_tests/test_bundles/dart2js-canvaskit-engine
-            os: depot-ubuntu-22.04-2
+            os: depot-ubuntu-22.04-8
             config_name: web_tests/test_bundles/dart2js-canvaskit-engine
           - name: web_tests/test_bundles/dart2js-canvaskit-ui
-            os: depot-ubuntu-22.04-2
+            os: depot-ubuntu-22.04-8
             config_name: web_tests/test_bundles/dart2js-canvaskit-ui
           - name: web_tests/test_bundles/dart2wasm-canvaskit-engine
-            os: depot-ubuntu-22.04-2
+            os: depot-ubuntu-22.04-8
             config_name: web_tests/test_bundles/dart2wasm-canvaskit-engine
           - name: web_tests/test_bundles/dart2wasm-skwasm-ui
-            os: depot-ubuntu-22.04-2
+            os: depot-ubuntu-22.04-8
             config_name: web_tests/test_bundles/dart2wasm-skwasm-ui
           - name: web_tests/test_bundles/fallbacks
-            os: depot-ubuntu-22.04-2
+            os: depot-ubuntu-22.04-8
             config_name: web_tests/test_bundles/fallbacks
 
 
