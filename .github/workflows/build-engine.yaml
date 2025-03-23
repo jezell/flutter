@@ -23,53 +23,235 @@ jobs:
           # host_debug, host_debug_unopt, host_profile, host_release, wasm_debug_unopt, wasm_release,
 
           - name: linux host release
+            os: depot-ubuntu-22.04-2
             config_name: ci/host_release_desktop
-            os: depot-ubuntu-22.04-16
 
           - name: linux host debug
             config_name: ci/host_debug_desktop
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
 
+          #- name: linux host release
+          #  os: depot-ubuntu-22.04-2
+          #  config_name: host_profile
+
+          #- name: linux host release
+          #  os: depot-ubuntu-22.04-2
+          #  config_name: host_profile_arm64
+
+          #- name: linux host release
+          #  os: depot-ubuntu-22.04-2
+          #  config_name: host_release_arm64
+
+          - name: linux host debug arm64 tests
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_debug_arm64_tests
+
+          - name: linux host debug clang tidy
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_debug_clang_tidy
+
+          - name: linux host debug framrwork
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_debug_framework
+
+          - name: linux host debug gen snapshot
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_debug_gen_snapshot
+
+          - name: linux host debug unopt arm64
+            os: depot-ubuntu-22.04-2
+            config_name: ci/ci/host_debug_unopt_arm64
+
+          - name: linux host profile arm64 tests
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_profile_arm64_tests
+
+          - name: linux host profile framework
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_profile_framework
+
+          - name: linux host profile gen snapshot
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_profile_gen_snapshot
+
+          - name: linux host release arm64 tests
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_release_arm64_tests
+
+          - name: linux host release framework
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_release_framework
+
+          - name: linux host release gen snapshot
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_release_gen_snapshot
+
+          - name: linux host profile
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_profile
+
+          - name: linux host release
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_release
+
+          - name: linux host debug
+            config_name: ci/host_debug
+            os: depot-ubuntu-22.04-2
+
+          - name: linux host release framework
+            config_name: ci/host_release_framework
+            os: depot-ubuntu-22.04-2
+
+          - name: linx host debug framework
+            config_name: ci/host_debug_framework
+            os: depot-ubuntu-22.04-2
 
           - name: linux wasm release (web)
             config_name: wasm_release
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
 
           - name: linux wasm debug (web)
             config_name: wasm_debug_unopt
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
 
           - name: android profile
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
             config_name: ci/android_profile
 
           - name: android profile arm64
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
             config_name: ci/android_profile_arm64
 
           - name: android profile x64
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
             config_name: ci/android_profile_x64
 
           - name: android release
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
             config_name: ci/android_release
 
           - name: android release arm64
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
             config_name: ci/android_release_arm64
 
           - name: android release x64
-            os: depot-ubuntu-22.04-16
+            os: depot-ubuntu-22.04-2
             config_name: ci/android_release_x64
 
          # ------------------------- MAC BUILDS -------------------------
-          - name: mac host release
-            config_name: ci/host_release
+
+          - name: mac debug arm64
             os: depot-macos-latest
+            config_name: ci/mac_debug_arm64
+
+          - name: mac debug framework arm64
+            os: depot-macos-latest
+            config_name: ci/mac_debug_framework_arm64
+
+          - name: mac debug gen snapshot arm64
+            os: depot-macos-latest
+            config_name: ci/mac_debug_gen_snapshot_arm64
+
+          - name: mac profile arm64
+            os: depot-macos-latest
+            config_name: ci/mac_profile_arm64
+
+          - name: mac profile frmaoek arm64
+            os: depot-macos-latest
+            config_name: ci/mac_profile_framework_arm64
+
+          - name: mac profile gen snapshot arm64
+            os: depot-macos-latest
+            config_name: ci/mac_profile_gen_snapshot_arm64
+
+          - name: mac release arm64
+            os: depot-macos-latest
+            config_name: ci/mac_release_arm64
+
+          - name: mac release arm64 tests
+            os: depot-macos-latest
+            config_name: ci/mac_release_arm64_tests
+
+          - name: mac framework arm64
+            os: depot-macos-latest
+            config_name: ci/mac_release_framework_arm64
+
+          - name: mac mac release gen snapshot arm64
+            os: depot-macos-latest
+            config_name: ci/mac_release_gen_snapshot_arm64
+
+          - name: mac host debug arm64 tests
+            os: depot-macos-latest
+            config_name: ci/host_debug_arm64_tests
+
+          - name: mac host debug clang tidy
+            os: depot-macos-latest
+            config_name: ci/host_debug_clang_tidy
+
+          - name: mac host debug framework
+            os: depot-macos-latest
+            config_name:  ci/host_debug_framework
+
+          - name: mac host debug den snapshot
+            os: depot-macos-latest
+            config_name: ci/host_debug_gen_snapshot
+
+          - name: mac host debug unopt arm64
+            os: depot-macos-latest
+            config_name: ci/ci/host_debug_unopt_arm64
+
+          - name: mac host profile arm64 tests
+            os: depot-macos-latest
+            config_name: ci/host_profile_arm64_tests
+
+          - name: mac host profile framework
+            os: depot-macos-latest
+            config_name: ci/host_profile_framework
+
+          - name: mac host profile gen snapshot
+            os: depot-macos-latest
+            config_name: ci/host_profile_gen_snapshot
+
+          - name: mac host release arm64 tests
+            os: depot-macos-latest
+            config_name: ci/host_release_arm64_tests
+
+          - name: mac host release framework
+            os: depot-macos-latest
+            config_name: ci/host_release_framework
+
+          - name: mac host release gen snapshot
+            os: depot-macos-latest
+            config_name: ci/host_release_gen_snapshot
+
+          - name: mac host profile
+            os: depot-macos-latest
+            config_name: ci/host_profile
+
+          #- name: mac host profile
+          #  os: depot-macos-latest
+          #  config_name: host_profile
+          #- name: mac host profile arm64
+          #  os: depot-macos-latest
+          #  config_name: host_profile_arm64
+          #- name: mac host arm64
+          #  os: depot-macos-latest
+          #  config_name: host_release_arm64
+
+          - name: mac host release
+            os: depot-macos-latest
+            config_name: ci/host_release
 
           - name: mac host debug
             config_name: ci/host_debug
+            os: depot-macos-latest
+
+          - name: mac release framework
+            config_name: ci/host_release_framework
+            os: depot-macos-latest
+
+          - name: mac debug framework
+            config_name: ci/host_debug_framework
             os: depot-macos-latest
 
           - name: ios debug
@@ -115,8 +297,6 @@ jobs:
           - name: ios release extension safe
             config_name: ci/ios_release_extension_safe
             os: depot-macos-latest
-
-
 
           # ------------------------- WINDOWS BUILDS -------------------------
 
@@ -252,7 +432,7 @@ jobs:
 
   build-release:
     needs: build-engine
-    runs-on: depot-ubuntu-22.04-16
+    runs-on: depot-ubuntu-22.04-2
     defaults:
       run:
         shell: bash
@@ -333,29 +513,29 @@ jobs:
           rm ios_release_extension_safe.tar.gz
 
 
-          python3 engine/src/flutter/sky/tools/create_ios_framework.py
-          --dst out/ios
-          --arm64-out-dir ios_debug
-          --simulator-x64-out-dir ios_debug_sim
-          --simulator-arm64-out-dir ios_debug_sim_arm64
-          --dsym
+          python3 engine/src/flutter/sky/tools/create_ios_framework.py \
+          --dst out/ios \
+          --arm64-out-dir ios_debug \
+          --simulator-x64-out-dir ios_debug_sim \
+          --simulator-arm64-out-dir ios_debug_sim_arm64 \
+          --dsym \
           --strip
 
-          python3 engine/src/flutter/sky/tools/create_ios_framework.py
-          --dst out/ios_release
-          --arm64-out-dir ios_release
-          --simulator-x64-out-dir ios_debug_sim
-          --simulator-arm64-out-dir ios_debug_sim_arm64
-          --dsym
-          --strip
+          python3 engine/src/flutter/sky/tools/create_ios_framework.py \
+          --dst out/ios_release \
+          --arm64-out-dir ios_release \
+          --simulator-x64-out-dir ios_debug_sim \
+          --simulator-arm64-out-dir ios_debug_sim_arm64 \
+          --dsym \
+          --strip \
 
-          python3 engine/src/flutter/sky/tools/create_ios_framework.py
-          --dst out/ios_profile
-          --arm64-out-dir ios_profile
-          --simulator-x64-out-dir ios_debug_sim
-          --simulator-arm64-out-dir ios_debug_sim_arm64
-          --dsym
-          --strip
+          python3 engine/src/flutter/sky/tools/create_ios_framework.py \
+          --dst out/ios_profile \
+          --arm64-out-dir ios_profile \
+          --simulator-x64-out-dir ios_debug_sim \
+          --simulator-arm64-out-dir ios_debug_sim_arm64 \
+          --dsym \
+          --strip \
 
           gcloud storage cp --recursive out/ios/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios/
           gcloud storage cp --recursive out/ios_release/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios_release/
