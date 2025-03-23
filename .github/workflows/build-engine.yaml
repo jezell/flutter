@@ -50,45 +50,68 @@ jobs:
             os: depot-ubuntu-22.04-2
             config_name: ci/host_debug_clang_tidy
 
-          - name: linux host debug framrwork
+          - name: linux host debug test
             os: depot-ubuntu-22.04-2
-            config_name: ci/host_debug_framework
+            config_name: ci/host_debug_test
 
-          - name: linux host debug gen snapshot
+          - name: linux host debug ddm
             os: depot-ubuntu-22.04-2
-            config_name: ci/host_debug_gen_snapshot
+            config_name: ci/host_debug_ddm
 
-          - name: linux host debug unopt arm64
+          - name: linux host debug no prebuilt dart sdk
             os: depot-ubuntu-22.04-2
-            config_name: ci/ci/host_debug_unopt_arm64
+            config_name: ci/host_debug_no_prebuilt_dart_sdk
 
-          - name: linux host profile arm64 tests
+          - name: linux host debug unopt
             os: depot-ubuntu-22.04-2
-            config_name: ci/host_profile_arm64_tests
+            config_name: ci/host_debug_unopt
 
-          - name: linux host profile framework
+          - name: linux host debug unopt impeller tests
             os: depot-ubuntu-22.04-2
-            config_name: ci/host_profile_framework
+            config_name: ci/host_debug_unopt_impeller_tests
+          - name: linux host profile desktop
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_profile_desktop
+          - name: linux host profile test
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_profile_test
+          - name: linux host release test
+            os: depot-ubuntu-22.04-2
+            config_name: ci/host_release_test
+          - name: linux debug arm64
+            os: depot-ubuntu-22.04-2
+            config_name: ci/linux_debug_arm64
+          - name: linux profile arm64
+            os: depot-ubuntu-22.04-2
+            config_name: ci/linux_profile_arm64
+          - name: linux release arm64
+            os: depot-ubuntu-22.04-2
+            config_name: ci/linux_release_arm64
 
-          - name: linux host profile gen snapshot
+          - name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
             os: depot-ubuntu-22.04-2
-            config_name: ci/host_profile_gen_snapshot
+            config_name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
+          - name: web_tests/test_bundles/dart2js-canvaskit-engine
+            os: depot-ubuntu-22.04-2
+            config_name: web_tests/test_bundles/dart2js-canvaskit-engine
+          - name: web_tests/test_bundles/dart2js-canvaskit-ui
+            os: depot-ubuntu-22.04-2
+            config_name: web_tests/test_bundles/dart2js-canvaskit-ui
+          - name: web_tests/test_bundles/dart2wasm-canvaskit-engine
+            os: depot-ubuntu-22.04-2
+            config_name: web_tests/test_bundles/dart2wasm-canvaskit-engine
+          - name: web_tests/test_bundles/dart2wasm-skwasm-ui
+            os: depot-ubuntu-22.04-2
+            config_name: web_tests/test_bundles/dart2wasm-skwasm-ui
+          - name: web_tests/test_bundles/fallbacks
+            os: depot-ubuntu-22.04-2
+            config_name: web_tests/test_bundles/fallbacks
 
-          - name: linux host release arm64 tests
-            os: depot-ubuntu-22.04-2
-            config_name: ci/host_release_arm64_tests
-
-          - name: linux host release framework
-            os: depot-ubuntu-22.04-2
-            config_name: ci/host_release_framework
-
-          - name: linux host release gen snapshot
-            os: depot-ubuntu-22.04-2
-            config_name: ci/host_release_gen_snapshot
 
           #- name: linux host profile
           #  os: depot-ubuntu-22.04-2
           #  config_name: ci/host_profile
+
 
           - name: linux host release
             os: depot-ubuntu-22.04-2
@@ -96,14 +119,6 @@ jobs:
 
           - name: linux host debug
             config_name: ci/host_debug
-            os: depot-ubuntu-22.04-2
-
-          - name: linux host release framework
-            config_name: ci/host_release_framework
-            os: depot-ubuntu-22.04-2
-
-          - name: linx host debug framework
-            config_name: ci/host_debug_framework
             os: depot-ubuntu-22.04-2
 
           - name: linux wasm release (web)
@@ -118,7 +133,7 @@ jobs:
             os: depot-ubuntu-22.04-2
             config_name: ci/android_debug
 
-          - name: android debug_ arm64
+          - name: android debug arm64
             os: depot-ubuntu-22.04-2
             config_name: ci/android_debug_arm64
 
@@ -252,7 +267,7 @@ jobs:
 
           - name: mac host debug unopt arm64
             os: depot-macos-latest
-            config_name: ci/ci/host_debug_unopt_arm64
+            config_name: ci/host_debug_unopt_arm64
 
           - name: mac host profile arm64 tests
             os: depot-macos-latest
