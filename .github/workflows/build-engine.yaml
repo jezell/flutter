@@ -53,7 +53,7 @@ jobs:
 
           - name: android release
             os: ubuntu-latest
-            config_name:  ci/android_release
+            config_name: ci/android_release
 
           - name: android release arm64
             os: ubuntu-latest
@@ -184,35 +184,35 @@ jobs:
           # Append depot_tools to the PATH for subsequent steps
           echo "$HOME/depot_tools" >> $GITHUB_PATH
 
-      - name: Gclient Sync
+      - name: gclient sync wasm
         if: startsWith(matrix.os, 'ubuntu') && contains(matrix.config_name, 'wasm')
         run: |
           # Use custom gclient to trim size
           cp engine/scripts/slim-linux-web.gclient .gclient
           gclient sync -D
 
-      - name: Gclient Sync
+      - name: gclient sync android
         if: startsWith(matrix.os, 'ubuntu') && contains(matrix.config_name, 'android')
         run: |
           # Use custom gclient to trim size
           cp engine/scripts/slim-linux-android.gclient .gclient
           gclient sync -D
 
-      - name: Gclient Sync
+      - name: gclient sync linux
         if: startsWith(matrix.os, 'ubuntu') && contains(matrix.config_name, 'host')
         run: |
           # Use custom gclient to trim size
           cp engine/scripts/slim-linux-desktop.gclient .gclient
           gclient sync -D
 
-      - name: Gclient Sync
+      - name: gclient sync macos
         if: startsWith(matrix.os, 'macos')
         run: |
           # Use custom gclient to trim size
           cp engine/scripts/slim-mac.gclient .gclient
           gclient sync -D
 
-      - name: Gclient Sync
+      - name: gclient sync windows
         if: startsWith(matrix.os, 'windows')
         run: |
           # Use custom gclient to trim size
