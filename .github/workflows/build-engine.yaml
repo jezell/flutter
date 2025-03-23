@@ -439,7 +439,7 @@ jobs:
           echo "$HOME/depot_tools" >> $GITHUB_PATH
 
       - name: gclient sync web_tests
-        if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'test')
+        if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'web_tests')
         run: |
           # Use custom gclient to trim size
           cp engine/scripts/slim-linux-web.gclient .gclient
@@ -489,25 +489,16 @@ jobs:
           ./flutter/bin/et fetch
 
       - name: Build Engine
-        if: contains(matrix.config_name, 'test') == false
-        run: |
-          echo "Building config: ${{ matrix.config_name }}"
+        un: |
+          echo "Running et config: ${{ matrix.config_name }}"
           cd engine/src
           ./flutter/bin/et build --config ${{ matrix.config_name }}
-
-      - name: Build Engine
-        if: contains(matrix.config_name, 'test') == true
-        run: |
-          echo "Building config: ${{ matrix.config_name }}"
-          cd engine/src
-          ./flutter/bin/et test --config ${{ matrix.config_name }}
 
       - name: Copy Zip Archives
         if: ${{ hashFiles(format('engine/src/out/{0}/zip_archives/**', matrix.config_name))!= ''}} && contains(matrix.config_name, 'test') == false
         run: |
           cd engine/src
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
-
           gcloud storage cp --recursive out/${{ matrix.config_name }}/zip_archives/* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/
 
 
