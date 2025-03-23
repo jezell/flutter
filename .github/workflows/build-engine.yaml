@@ -23,11 +23,11 @@ jobs:
           # host_debug, host_debug_unopt, host_profile, host_release, wasm_debug_unopt, wasm_release,
 
           - name: linux host release
-            config_name: ci/host_release
+            config_name: ci/host_release_desktop
             os: depot-ubuntu-22.04-16
 
           - name: linux host debug
-            config_name: ci/host_debug
+            config_name: ci/host_debug_desktop
             os: depot-ubuntu-22.04-16
 
 
@@ -238,7 +238,7 @@ jobs:
           cd engine/src
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
 
-          gcloud storage cp --recursive out/${{ matrix.config_name }}/zip_archives/* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}/
+          gcloud storage cp --recursive out/${{ matrix.config_name }}/zip_archives/* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/
 
 
       - name: Copy Engine Outputs
