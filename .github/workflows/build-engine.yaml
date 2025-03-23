@@ -433,6 +433,13 @@ jobs:
           # Append depot_tools to the PATH for subsequent steps
           echo "$HOME/depot_tools" >> $GITHUB_PATH
 
+      - name: gclient sync web_tests
+        if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'web_tests')
+        run: |
+          # Use custom gclient to trim size
+          cp engine/scripts/slim-linux-web.gclient .gclient
+          gclient sync -D
+
       - name: gclient sync wasm
         if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'wasm')
         run: |
