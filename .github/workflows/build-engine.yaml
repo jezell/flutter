@@ -23,7 +23,7 @@ jobs:
         include:
 
           - name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
-            os: depot-ubuntu-22.04-8
+            os: depot-ubuntu-22.04-16
             config_name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
           - name: web_tests/test_bundles/dart2js-canvaskit-engine
             os: depot-ubuntu-22.04-8
@@ -446,6 +446,7 @@ jobs:
           cd engine/src
           ./flutter/tools/gn --unoptimized
           ninja -C out/host_debug_unopt/
+          flutter/lib/web_ui/dev/felt test
 
       - name: gclient sync wasm
         if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'wasm')
