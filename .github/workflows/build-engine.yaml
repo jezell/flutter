@@ -332,7 +332,8 @@ jobs:
           tar -xzf ios_release_extension_safe.tar.gz
           rm ios_release_extension_safe.tar.gz
 
-          python3 flutter/sky/tools/create_ios_framework.py
+
+          python3 engine/src/flutter/sky/tools/create_ios_framework.py
           --dst out/ios
           --arm64-out-dir ios_debug
           --simulator-x64-out-dir ios_debug_sim
@@ -340,6 +341,7 @@ jobs:
           --dsym
           --strip
 
+          python3 engine/src/flutter/sky/tools/create_ios_framework.py
           --dst out/ios_release
           --arm64-out-dir ios_release
           --simulator-x64-out-dir ios_debug_sim
@@ -347,6 +349,7 @@ jobs:
           --dsym
           --strip
 
+          python3 engine/src/flutter/sky/tools/create_ios_framework.py
           --dst out/ios_profile
           --arm64-out-dir ios_profile
           --simulator-x64-out-dir ios_debug_sim
@@ -354,7 +357,7 @@ jobs:
           --dsym
           --strip
 
-          gcloud storage cp --recursive ios/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios/
-          gcloud storage cp --recursive ios_release/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios_release/
-          gcloud storage cp --recursive ios_profile/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios_profile/
+          gcloud storage cp --recursive out/ios/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios/
+          gcloud storage cp --recursive out/ios_release/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios_release/
+          gcloud storage cp --recursive out/ios_profile/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios_profile/
 
