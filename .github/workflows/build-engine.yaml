@@ -81,6 +81,7 @@ jobs:
           - name: linux debug arm64
             os: depot-ubuntu-22.04-2
             config_name: ci/linux_debug_arm64
+
           - name: linux profile arm64
             os: depot-ubuntu-22.04-2
             config_name: ci/linux_profile_arm64
@@ -457,7 +458,7 @@ jobs:
           gclient sync -D
 
       - name: gclient sync linux
-        if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'host')
+        if: contains(matrix.os, 'ubuntu') && (contains(matrix.config_name, 'linux') || contains(matrix.config_name, 'host'))
         run: |
           # Use custom gclient to trim size
           cp engine/scripts/slim-linux-desktop.gclient .gclient
