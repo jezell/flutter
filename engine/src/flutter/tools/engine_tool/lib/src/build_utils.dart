@@ -97,7 +97,7 @@ Future<int> runBuild(
     rbeConfig: rbeConfig,
     concurrency: concurrency,
     extraGnArgs: gnArgs,
-    runTests: false,
+    runTests: true,
     extraNinjaArgs: <String>[
       ...targets.map((Label label) => label.toNinjaLabel()),
       // If the environment is verbose, pass the verbose flag to ninja.
