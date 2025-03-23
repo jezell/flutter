@@ -76,7 +76,7 @@ jobs:
             config_name: ci/ios_debug
             os: depot-macos-latest
 
-          - name: ios debug sum
+          - name: ios debug sim
             config_name: ci/ios_debug_sim
             os: depot-macos-latest
 
@@ -285,16 +285,16 @@ jobs:
         run: |
 
           gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_profile.tar.gz' .
-          tar -xzf ci/ios_profile.tar.gz
-          rm ci/ios_profile.tar.gz
+          tar -xzf ios_profile.tar.gz
+          rm ios_profile.tar.gz
 
           gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug.tar.gz' .
-          tar -xzf ci/ios_debug.tar.gz
-          rm ci/ios_debug.tar.gz
+          tar -xzf ios_debug.tar.gz
+          rm ios_debug.tar.gz
 
           gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_release.tar.gz' .
-          tar -xzf ci/ios_release.tar.gz
-          rm ci/ios_release.tar.gz
+          tar -xzf ios_release.tar.gz
+          rm ios_release.tar.gz
 
           gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug_sim.tar.gz' .
           tar -xzf ios_debug_sim.tar.gz
