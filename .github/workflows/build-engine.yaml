@@ -254,7 +254,7 @@ jobs:
       - name: build ios release
         run: |
 
-          gcloud storage cp --recursive gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }} .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/*' .
 
           tar -xvzf ci/ios_profile.tar.gz
           tar -xvzf ci/ios_debug.tar.gz
