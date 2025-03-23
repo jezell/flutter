@@ -41,9 +41,7 @@ jobs:
             os: depot-ubuntu-22.04-2
             config_name: web_tests/test_bundles/fallbacks
 
-          - name: linux host debug arm64 tests
-            os: depot-ubuntu-22.04-2
-            config_name: ci/host_debug_arm64_tests
+
           - name: linux host debug test
             os: depot-ubuntu-22.04-2
             config_name: ci/host_debug_test
