@@ -18,7 +18,7 @@ jobs:
         shell: bash
 
     strategy:
-      max-parallel: 20
+      max-parallel: 1
       matrix:
         include:
 
@@ -445,6 +445,7 @@ jobs:
           gclient sync -D
           cd engine/src
           ./flutter/tools/gn --unoptimized
+          ninja -C out/host_debug_unopt/
 
       - name: gclient sync wasm
         if: contains(matrix.os, 'ubuntu') && contains(matrix.config_name, 'wasm')
