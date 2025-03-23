@@ -39,6 +39,30 @@ jobs:
             config_name: wasm_debug_unopt
             os: ubuntu-latest
 
+          - name: Android Profile
+            os: ubuntu-latest
+            config_name: ci/android_profile
+
+          - name: Android Profile arm64
+            os: ubuntu-latest
+            config_name: ci/android_profile_arm64
+
+          - name: Android Profile x64
+            os: ubuntu-latest
+            config_name: ci/android_profile_x64
+
+          - name: Android Release
+            os: ubuntu-latest
+            config_name:  ci/android_release
+
+          - name: Android Release Arm64
+            os: ubuntu-latest
+            config_name: ci/android_release_arm64
+
+          - name: Android Release x64
+            os: ubuntu-latest
+            config_name: ci/android_release_x64
+
          # ------------------------- MAC BUILDS -------------------------
           - name: Mac host release
             config_name: ci/host_release
