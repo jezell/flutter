@@ -61,7 +61,7 @@ jobs:
           gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-linux-web
           config_name: ${{ matrix.config_name }}
-          engine_version: $${ github.sha }}
+          engine_version: ${{ github.sha }}
 
 
   build-engine-android:
@@ -157,7 +157,7 @@ jobs:
           gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-linux-android
           config_name: ${{ matrix.config_name }}
-          engine_version: $${ github.sha }}
+          engine_version: ${{ github.sha }}
 
 
   build-engine-linux:
@@ -224,7 +224,7 @@ jobs:
           gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-linux-desktop
           config_name: ${{ matrix.config_name }}
-          engine_version: $${ github.sha }}
+          engine_version: ${{ github.sha }}
 
       # ------------------------- TESTS BUILDS -------------------------
 
@@ -359,7 +359,7 @@ jobs:
           gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-mac
           config_name: ${{ matrix.config_name }}
-          engine_version: $${ github.sha }}
+          engine_version: ${{ github.sha }}
 
 
   build-engine-ios:
@@ -445,7 +445,7 @@ jobs:
           gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-mac
           config_name: ${{ matrix.config_name }}
-          engine_version: $${ github.sha }}
+          engine_version: ${{ github.sha }}
 
 
   #build-engine-windows:
@@ -472,7 +472,7 @@ jobs:
   #        gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
   #        gclient: slim-windows
   #        config_name: ${{ matrix.config_name }}
-  #        engine_version: $${ github.sha }}
+  #        engine_version: ${{ github.sha }}
 
   build-ios-release:
     needs: build-engine-ios
