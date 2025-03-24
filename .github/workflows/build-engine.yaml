@@ -37,11 +37,6 @@ jobs:
             os: depot-ubuntu-22.04-8
             config_name: ci/linux_release_arm64
 
-          #- name: linux host profile
-          #  os: depot-ubuntu-22.04-8
-          #  config_name: ci/host_profile
-
-
           - name: linux host release
             os: depot-ubuntu-22.04-8
             config_name: ci/host_release
@@ -78,8 +73,21 @@ jobs:
             os: depot-ubuntu-22.04-8
             config_name: ci/android_debug_arm64_validation_layers
 
+          - name: linux host release
+            os: depot-ubuntu-22.04-8
+            config_name: ci/host_release_desktop
 
+          - name: linux host debug
+            config_name: ci/host_debug_desktop
+            os: depot-ubuntu-22.04-8
 
+          - name: linux host debug clang tidy
+            os: depot-ubuntu-22.04-8
+            config_name: ci/host_debug_clang_tidy
+
+          - name: linux host debug ddm
+            os: depot-ubuntu-22.04-8
+            config_name: ci/host_debug_ddm
 
           - name: android debug unopt
             os: depot-ubuntu-22.04-8
@@ -133,8 +141,6 @@ jobs:
             os: depot-ubuntu-22.04-8
             config_name: ci/android_release_x64
 
-
-
          # ------------------------- MAC BUILDS -------------------------
 
           - name: mac debug arm64
@@ -165,8 +171,6 @@ jobs:
             os: depot-macos-latest
             config_name: ci/mac_release_arm64
 
-
-
           - name: mac framework arm64
             os: depot-macos-latest
             config_name: ci/mac_release_framework_arm64
@@ -174,8 +178,6 @@ jobs:
           - name: mac mac release gen snapshot arm64
             os: depot-macos-latest
             config_name: ci/mac_release_gen_snapshot_arm64
-
-
 
           - name: mac host debug clang tidy
             os: depot-macos-latest
@@ -193,7 +195,6 @@ jobs:
             os: depot-macos-latest
             config_name: ci/host_debug_unopt_arm64
 
-
           - name: mac host profile framework
             os: depot-macos-latest
             config_name: ci/host_profile_framework
@@ -201,7 +202,6 @@ jobs:
           - name: mac host profile gen snapshot
             os: depot-macos-latest
             config_name: ci/host_profile_gen_snapshot
-
 
           - name: mac host release framework
             os: depot-macos-latest
@@ -214,16 +214,6 @@ jobs:
           - name: mac host profile
             os: depot-macos-latest
             config_name: ci/host_profile
-
-          #- name: mac host profile
-          #  os: depot-macos-latest
-          #  config_name: host_profile
-          #- name: mac host profile arm64
-          #  os: depot-macos-latest
-          #  config_name: host_profile_arm64
-          #- name: mac host arm64
-          #  os: depot-macos-latest
-          #  config_name: host_release_arm64
 
           - name: mac host release
             os: depot-macos-latest
@@ -240,6 +230,8 @@ jobs:
           - name: mac debug framework
             config_name: ci/host_debug_framework
             os: depot-macos-latest
+
+          # ------------------------- iOS BUILDS -------------------------
 
           - name: ios debug
             config_name: ci/ios_debug
@@ -292,8 +284,39 @@ jobs:
           #  config_name: host_release
           #  os: windows-latest
 
+          # ------------------------- TESTS BUILDS -------------------------
 
+          # - name: linux host debug test
+          #  os: depot-ubuntu-22.04-8
+          #  config_name: ci/host_debug_test
+          # - name: linux host debug unopt impeller tests
+          #  os: depot-ubuntu-22.04-8
+          #  config_name: ci/host_debug_unopt_impeller_tests
+          # - name: linux host profile desktop
+          #  os: depot-ubuntu-22.04-8
+          #  config_name: ci/host_profile_desktop
+          #- name: linux host profile test
+          #  os: depot-ubuntu-22.04-8
+          #  config_name: ci/host_profile_test
+          #- name: linux host release test
+          #  os: depot-ubuntu-22.04-8
+          #  config_name: ci/host_release_test
+          #- name: android debug test
+          #  os: depot-ubuntu-22.04-8
+          #  config_name: ci/android_debug_test
 
+          # - name: mac release arm64 tests
+          #  os: depot-macos-latest
+          #  config_name: ci/mac_release_arm64_tests
+          #- name: mac host debug arm64 tests
+          #  os: depot-macos-latest
+          #  config_name: ci/host_debug_arm64_tests
+          #- name: mac host profile arm64 tests
+          #  os: depot-macos-latest
+          #  config_name: ci/host_profile_arm64_tests
+          #- name: mac host release arm64 tests
+          #  os: depot-macos-latest
+          #  config_name: ci/host_release_arm64_tests
 
           # Running web tests with et doesn't seem to work
 
@@ -315,69 +338,6 @@ jobs:
           #- name: web_tests/test_bundles/fallbacks
           #  os: depot-ubuntu-22.04-8
           #  config_name: web_tests/test_bundles/fallbacks
-
-          # ------------------------- TESTS BUILDS -------------------------
-          - name: linux host debug test
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_debug_test
-          - name: linux host debug unopt impeller tests
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_debug_unopt_impeller_tests
-          - name: linux host profile desktop
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_profile_desktop
-          - name: linux host profile test
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_profile_test
-          - name: linux host release test
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_release_test
-          - name: android debug test
-            os: depot-ubuntu-22.04-8
-            config_name: ci/android_debug_test
-
-          - name: mac release arm64 tests
-            os: depot-macos-latest
-            config_name: ci/mac_release_arm64_tests
-          - name: mac host debug arm64 tests
-            os: depot-macos-latest
-            config_name: ci/host_debug_arm64_tests
-          - name: mac host profile arm64 tests
-            os: depot-macos-latest
-            config_name: ci/host_profile_arm64_tests
-          - name: mac host release arm64 tests
-            os: depot-macos-latest
-            config_name: ci/host_release_arm64_tests
-
-          - name: linux host release
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_release_desktop
-
-          - name: linux host debug
-            config_name: ci/host_debug_desktop
-            os: depot-ubuntu-22.04-8
-
-          #- name: linux host release
-          #  os: depot-ubuntu-22.04-8
-          #  config_name: host_profile
-
-          #- name: linux host release
-          #  os: depot-ubuntu-22.04-8
-          #  config_name: host_profile_arm64
-
-          #- name: linux host release
-          #  os: depot-ubuntu-22.04-8
-          #  config_name: host_release_arm64
-
-
-          - name: linux host debug clang tidy
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_debug_clang_tidy
-
-
-          - name: linux host debug ddm
-            os: depot-ubuntu-22.04-8
-            config_name: ci/host_debug_ddm
 
     steps:
       - name: 'Set up Cloud SDK'
@@ -604,25 +564,25 @@ jobs:
 
           python3 engine/src/flutter/sky/tools/create_ios_framework.py \
           --dst out/ios \
-          --arm64-out-dir ios_debug \
-          --simulator-x64-out-dir ios_debug_sim \
-          --simulator-arm64-out-dir ios_debug_sim_arm64 \
+          --arm64-out-dir out/ci/ios_debug \
+          --simulator-x64-out-dir out/ci/ios_debug_sim \
+          --simulator-arm64-out-dir out/ci/ios_debug_sim_arm64 \
           --dsym \
           --strip
 
           python3 engine/src/flutter/sky/tools/create_ios_framework.py \
           --dst out/ios_release \
-          --arm64-out-dir ios_release \
-          --simulator-x64-out-dir ios_debug_sim \
-          --simulator-arm64-out-dir ios_debug_sim_arm64 \
+          --arm64-out-dir out/ci/ios_release \
+          --simulator-x64-out-dir out/ci/ios_debug_sim \
+          --simulator-arm64-out-dir out/ci/ios_debug_sim_arm64 \
           --dsym \
           --strip \
 
           python3 engine/src/flutter/sky/tools/create_ios_framework.py \
           --dst out/ios_profile \
-          --arm64-out-dir ios_profile \
-          --simulator-x64-out-dir ios_debug_sim \
-          --simulator-arm64-out-dir ios_debug_sim_arm64 \
+          --arm64-out-dir out/ci/ios_profile \
+          --simulator-x64-out-dir out/ci/ios_debug_sim \
+          --simulator-arm64-out-dir out/ci/ios_debug_sim_arm64 \
           --dsym \
           --strip \
 
