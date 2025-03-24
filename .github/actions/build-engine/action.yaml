@@ -46,6 +46,11 @@ runs:
       with:
         python-version: '3.13'
 
+    - name:
+      if: ${{ contains(inputs.config_name, 'android') == true }}
+      run: |
+        engine/src/build/linux/sysroot_scripts/install-sysroot.py --arch=x64
+
     - name: Set up depot_tools / gclient
       shell: bash
       run: |
