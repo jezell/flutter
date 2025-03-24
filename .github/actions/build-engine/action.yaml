@@ -19,7 +19,7 @@ inputs:
     required: false
     default: ""
 runs:
-
+  using: "composite"
   steps:
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v2'
