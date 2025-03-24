@@ -19,10 +19,7 @@ inputs:
     required: false
     default: ""
 runs:
-  using: "composite"
-  defaults:
-    run:
-      shell: bash
+
   steps:
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v2'
@@ -30,6 +27,7 @@ runs:
         version: '>= 363.0.0'
 
     - name: Setup gcloud
+      shell: bash
       env:
         GCP_CREDENTIALS: ${{ inputs.gcp_credentials }}
       run: |
@@ -37,6 +35,7 @@ runs:
         gcloud auth activate-service-account --key-file="$HOME"/gcloud.json
 
     - name: Free disk space
+      shell: bash
       if: contains(matrix.os, 'ubuntu')
       run: curl -fsSL https://raw.githubusercontent.com/kou/arrow/e49d8ae15583ceff03237571569099a6ad62be32/ci/scripts/util_free_space.sh | bash
 
@@ -48,39 +47,45 @@ runs:
         python-version: '3.13'
 
     - name: Set up depot_tools / gclient
+      shell: bash
       run: |
         git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
         # Append depot_tools to the PATH for subsequent steps
         echo "$HOME/depot_tools" >> $GITHUB_PATH
 
     - name: Copy gclient file
+      shell: bash
       run: |
         # Use custom gclient to trim size
         cp engine/scripts/${{ inputs.gclient }}.gclient .gclient
 
     - name: Gclient sync
+      shell: bash
       run: gclient sync -D
 
     - name: Fetch engine dependencies
+      shell: bash
       run: |
         cd engine/src
         ./flutter/bin/et fetch
 
     - name: Build Engine
+      shell: bash
       run: |
         echo "Running et config: ${{ inputs.config_name }}"
         cd engine/src
         ./flutter/bin/et build --config ${{ inputs.config_name }}
 
     - name: Copy Zip Archives
+      shell: bash
       if: ${{ hashFiles(format('engine/src/out/{0}/zip_archives/**', inputs.config_name))!= ''  && contains(inputs.config_name, 'test') == false}}
       run: |
         cd engine/src
         echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
         gcloud storage cp --recursive out/${{ inputs.config_name }}/zip_archives/* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ inputs.engine_version }}/
 
-
     - name: Copy Engine Outputs
+      shell: bash
       if: ${{ hashFiles(format('engine/src/out/{0}/zip_archives/**', inputs.config_name)) == '' && contains(inputs.config_name, 'test') == false }}
       run: |
         cd engine/src
