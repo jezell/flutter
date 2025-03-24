@@ -363,35 +363,6 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Install Dependencies (Example for Linux)
-        if: contains(matrix.os, 'ubuntu')
-        run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends -y \
-            clang \
-            cmake \
-            ninja-build \
-            unzip \
-            zip \
-            xz-utils \
-            libgtk-3-dev \
-            libglu-dev
-
-      - name: Install Dependencies (Example for macOS)
-        if: contains(matrix.os, 'macos')
-        run: |
-          brew update
-          brew install \
-            cmake \
-            ninja
-
-      - name: Install Dependencies (Example for Windows)
-        if: contains(matrix.os, 'windows')
-        run: |
-          choco install -y -v \
-            cmake \
-            ninja
-
       - name: Set up depot_tools / gclient
         run: |
           git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
@@ -467,7 +438,7 @@ jobs:
         run: |
           cd engine/src
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
-          gcloud storage cp --recursive out/${{ matrix.config_name }}/zip_archives/* gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/
+          gcloud storage cp --recursive out/${{ matrix.config_name }}/zip_archives/* gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/
 
 
       - name: Copy Engine Outputs
@@ -476,7 +447,7 @@ jobs:
           cd engine/src
           echo "copying output to /build_outputs/flutter/engine/<engine-revision>/<platform>/<artifact-name>"
           tar c out/${{ matrix.config_name }} | gzip > out/${{ matrix.config_name }}.tar.gz
-          gcloud storage cp --recursive out/${{ matrix.config_name }}.tar.gz gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/${{ matrix.config_name }}.tar.gz
+          gcloud storage cp --recursive out/${{ matrix.config_name }}.tar.gz gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/${{ matrix.config_name }}.tar.gz
 
 
   build-release:
@@ -510,56 +481,68 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v4
 
+      - name: Set up depot_tools / gclient
+        run: |
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
+          # Append depot_tools to the PATH for subsequent steps
+          echo "$HOME/depot_tools" >> $GITHUB_PATH
+
+      - name: gclient sync macos
+        run: |
+          # Use custom gclient to trim size
+          cp engine/scripts/slim-mac.gclient .gclient
+          gclient sync -D
+
       - name: build ios release
         run: |
 
           cd engine/src
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_profile.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_profile.tar.gz' .
           tar -xzf ios_profile.tar.gz
           rm ios_profile.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_debug.tar.gz' .
           tar -xzf ios_debug.tar.gz
           rm ios_debug.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_release.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_release.tar.gz' .
           tar -xzf ios_release.tar.gz
           rm ios_release.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug_sim.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_debug_sim.tar.gz' .
           tar -xzf ios_debug_sim.tar.gz
           rm ios_debug_sim.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug_sim_arm64.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_debug_sim_arm64.tar.gz' .
           tar -xzf ios_debug_sim_arm64.tar.gz
           rm ios_debug_sim_arm64.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_release_extension_safe.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_release_extension_safe.tar.gz' .
           tar -xzf ios_release_extension_safe.tar.gz
           rm ios_release_extension_safe.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug_extension_safe.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_debug_extension_safe.tar.gz' .
           tar -xzf ios_debug_extension_safe.tar.gz
           rm ios_debug_extension_safe.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug_sim_arm64_extension_safe.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_debug_sim_arm64_extension_safe.tar.gz' .
           tar -xzf ios_debug_sim_arm64_extension_safe.tar.gz
           rm  ios_debug_sim_arm64_extension_safe.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug_unopt_sim_arm64_extension_safe.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_debug_unopt_sim_arm64_extension_safe.tar.gz' .
           tar -xzf ios_debug_unopt_sim_arm64_extension_safe.tar.gz
           rm ios_debug_unopt_sim_arm64_extension_safe.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_debug_sim_extension_safe.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_debug_sim_extension_safe.tar.gz' .
           tar -xzf ios_debug_sim_extension_safe.tar.gz
           rm ios_debug_sim_extension_safe.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_profile_extension_safe.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_profile_extension_safe.tar.gz' .
           tar -xzf ios_profile_extension_safe.tar.gz
           rm ios_profile_extension_safe.tar.gz
 
-          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ci/ios_release_extension_safe.tar.gz' .
+          gcloud storage cp --recursive 'gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ci/ios_release_extension_safe.tar.gz' .
           tar -xzf ios_release_extension_safe.tar.gz
           rm ios_release_extension_safe.tar.gz
 
@@ -588,7 +571,7 @@ jobs:
           --dsym \
           --strip \
 
-          gcloud storage cp --recursive out/ios/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios/
-          gcloud storage cp --recursive out/ios_release/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios_release/
-          gcloud storage cp --recursive out/ios_profile/ gs://flutter-builds/flutter_infra_release/flutter/engine/${{ github.sha }}/ios_profile/
+          gcloud storage cp --recursive out/ios/ gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ios/
+          gcloud storage cp --recursive out/ios_release/ gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ios_release/
+          gcloud storage cp --recursive out/ios_profile/ gs://flutter-builds/flutter_infra_release/flutter/engine/4baf71f9013dfe1ec59a68eace0de7b7927a1839/ios_profile/
 
