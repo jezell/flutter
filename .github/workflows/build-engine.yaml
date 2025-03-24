@@ -421,6 +421,7 @@ jobs:
     steps:
 
       - name: mac build
+        uses: ./.github/actions/build-engine
         with:
           gclient: slim-mac
           config_name: ${{ matrix.config_name }}
