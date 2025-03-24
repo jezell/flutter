@@ -58,6 +58,7 @@ jobs:
       - name: web build
         uses: ./.github/actions/build-engine
         with:
+          gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-linux-web
           config_name: ${{ matrix.config_name }}
           engine_version: $${ github.sha }}
@@ -153,6 +154,7 @@ jobs:
       - name: android build
         uses: ./.github/actions/build-engine
         with:
+          gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-linux-android
           config_name: ${{ matrix.config_name }}
           engine_version: $${ github.sha }}
@@ -219,6 +221,7 @@ jobs:
       - name: linux build
         uses: ./.github/actions/build-engine
         with:
+          gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-linux-desktop
           config_name: ${{ matrix.config_name }}
           engine_version: $${ github.sha }}
@@ -353,6 +356,7 @@ jobs:
       - name: mac build
         uses: ./.github/actions/build-engine
         with:
+          gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-mac
           config_name: ${{ matrix.config_name }}
           engine_version: $${ github.sha }}
@@ -438,6 +442,7 @@ jobs:
       - name: mac build
         uses: ./.github/actions/build-engine
         with:
+          gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
           gclient: slim-mac
           config_name: ${{ matrix.config_name }}
           engine_version: $${ github.sha }}
@@ -465,6 +470,7 @@ jobs:
   #    - name: windows build
   #      uses: ./.github/actions/build-engine
   #      with:
+  #        gcp_credentials: ${{ secrets.GOOGLE_STORAGE_BUCKET_SECRET }}
   #        gclient: slim-windows
   #        config_name: ${{ matrix.config_name }}
   #        engine_version: $${ github.sha }}
