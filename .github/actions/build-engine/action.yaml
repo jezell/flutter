@@ -48,6 +48,7 @@ runs:
 
     - name:
       if: ${{ contains(inputs.config_name, 'android') == true }}
+      shell: bash
       run: |
         engine/src/build/linux/sysroot_scripts/install-sysroot.py --arch=x64
 
