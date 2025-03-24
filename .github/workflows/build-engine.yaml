@@ -24,31 +24,31 @@ jobs:
 
           - name: linux wasm release (web)
             config_name: wasm_release
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
 
           - name: linux wasm debug (web)
             config_name: wasm_debug_unopt
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
 
           # Running web tests with et doesn't seem to work
 
           #- name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
-          #  os: depot-ubuntu-22.04-16
+          #  os: ubuntu-latest
           #  config_name: web_tests/test_bundles/dart2js-canvaskit-canvaskit
           #- name: web_tests/test_bundles/dart2js-canvaskit-engine
-          #  os: depot-ubuntu-22.04-4
+          #  os: ubuntu-latest
           #  config_name: web_tests/test_bundles/dart2js-canvaskit-engine
           #- name: web_tests/test_bundles/dart2js-canvaskit-ui
-          #  os: depot-ubuntu-22.04-4
+          #  os: ubuntu-latest
           #  config_name: web_tests/test_bundles/dart2js-canvaskit-ui
           #- name: web_tests/test_bundles/dart2wasm-canvaskit-engine
-          #  os: depot-ubuntu-22.04-4
+          #  os: ubuntu-latest
           #  config_name: web_tests/test_bundles/dart2wasm-canvaskit-engine
           #- name: web_tests/test_bundles/dart2wasm-skwasm-ui
-          #  os: depot-ubuntu-22.04-4
+          #  os: ubuntu-latest
           #  config_name: web_tests/test_bundles/dart2wasm-skwasm-ui
           #- name: web_tests/test_bundles/fallbacks
-          #  os: depot-ubuntu-22.04-4
+          #  os: ubuntu-latest
           #  config_name: web_tests/test_bundles/fallbacks
 
     steps:
@@ -76,75 +76,75 @@ jobs:
       matrix:
         include:
           - name: android debug
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug
 
           - name: android debug arm64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug_arm64
 
           - name: android debug arm64 clang tidy
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug_arm64_clang_tidy
 
           - name: android debug arm64 ddm
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug_arm64_ddm
 
           - name: android debug arm64 validation layers
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug_arm64_validation_layers
 
           - name: android debug unopt
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug_unopt
 
           - name: android debug x64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug_x64
 
           - name: android debug x86
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_debug_x86
 
           - name: android embedder debug unopt
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_embedder_debug_unopt
 
           - name: android emulator debug x64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_emulator_debug_x64
 
           - name: android emulator debug x86
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_emulator_debug_x86
 
           - name: android profile
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_profile
 
           - name: android profile arm64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_profile_arm64
 
           - name: android profile x64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_profile_x64
 
           - name: android release
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name:  ci/android_release
 
           - name: android release arm64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_release_arm64
 
           - name: android release arm64 ddm
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name:  ci/android_release_arm64_ddm
 
           - name: android release x64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/android_release_x64
 
     steps:
@@ -174,43 +174,43 @@ jobs:
         include:
 
           - name: linux host debug unopt
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/host_debug_unopt
 
           - name: linux debug arm64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/linux_debug_arm64
 
           - name: linux profile arm64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/linux_profile_arm64
           - name: linux release arm64
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/linux_release_arm64
 
           - name: linux host release
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/host_release
 
           - name: linux host debug
             config_name: ci/host_debug
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
 
 
           - name: linux host release
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/host_release_desktop
 
           - name: linux host debug
             config_name: ci/host_debug_desktop
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
 
           - name: linux host debug clang tidy
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/host_debug_clang_tidy
 
           - name: linux host debug ddm
-            os: depot-ubuntu-22.04-4
+            os: ubuntu-latest
             config_name: ci/host_debug_ddm
 
     steps:
@@ -229,22 +229,22 @@ jobs:
       # ------------------------- TESTS BUILDS -------------------------
 
       # - name: linux host debug test
-      #  os: depot-ubuntu-22.04-4
+      #  os: ubuntu-latest
       #  config_name: ci/host_debug_test
       # - name: linux host debug unopt impeller tests
-      #  os: depot-ubuntu-22.04-4
+      #  os: ubuntu-latest
       #  config_name: ci/host_debug_unopt_impeller_tests
       # - name: linux host profile desktop
-      #  os: depot-ubuntu-22.04-4
+      #  os: ubuntu-latest
       #  config_name: ci/host_profile_desktop
       #- name: linux host profile test
-      #  os: depot-ubuntu-22.04-4
+      #  os: ubuntu-latest
       #  config_name: ci/host_profile_test
       #- name: linux host release test
-      #  os: depot-ubuntu-22.04-4
+      #  os: ubuntu-latest
       #  config_name: ci/host_release_test
       #- name: android debug test
-      #  os: depot-ubuntu-22.04-4
+      #  os: ubuntu-latest
       #  config_name: ci/android_debug_test
 
   build-engine-mac:
@@ -262,92 +262,92 @@ jobs:
          # ------------------------- MAC BUILDS -------------------------
 
           - name: mac debug arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_debug_arm64
 
           - name: mac debug framework arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_debug_framework_arm64
 
           - name: mac debug gen snapshot arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_debug_gen_snapshot_arm64
 
           - name: mac profile arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_profile_arm64
 
           - name: mac profile frmaoek arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_profile_framework_arm64
 
           - name: mac profile gen snapshot arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_profile_gen_snapshot_arm64
 
           - name: mac release arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_release_arm64
 
           - name: mac framework arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_release_framework_arm64
 
           - name: mac mac release gen snapshot arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/mac_release_gen_snapshot_arm64
 
           - name: mac host debug clang tidy
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_debug_clang_tidy
 
           - name: mac host debug framework
-            os: depot-macos-latest
+            os: macos-latest
             config_name:  ci/host_debug_framework
 
           - name: mac host debug den snapshot
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_debug_gen_snapshot
 
           - name: mac host debug unopt arm64
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_debug_unopt_arm64
 
           - name: mac host profile framework
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_profile_framework
 
           - name: mac host profile gen snapshot
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_profile_gen_snapshot
 
           - name: mac host release framework
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_release_framework
 
           - name: mac host release gen snapshot
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_release_gen_snapshot
 
           - name: mac host profile
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_profile
 
           - name: mac host release
-            os: depot-macos-latest
+            os: macos-latest
             config_name: ci/host_release
 
           - name: mac host debug
             config_name: ci/host_debug
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: mac release framework
             config_name: ci/host_release_framework
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: mac debug framework
             config_name: ci/host_debug_framework
-            os: depot-macos-latest
+            os: macos-latest
 
     steps:
       - name: Check out the repository
@@ -377,61 +377,61 @@ jobs:
 
           - name: ios debug
             config_name: ci/ios_debug
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios debug sim
             config_name: ci/ios_debug_sim
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios debug sim arm64
             config_name: ci/ios_debug_sim_arm64
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios profile
             config_name: ci/ios_profile
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios release
             config_name: ci/ios_release
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios debug extension safe
             config_name: ci/ios_debug_extension_safe
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios debug sim arm64 extension safe
             config_name: ci/ios_debug_sim_arm64_extension_safe
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios debug sim extension safe
             config_name: ci/ios_debug_sim_extension_safe
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios debug unopt sim arm64 extension safe
             config_name: ci/ios_debug_unopt_sim_arm64_extension_safe
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios profile extension safe
             config_name: ci/ios_profile_extension_safe
-            os: depot-macos-latest
+            os: macos-latest
 
           - name: ios release extension safe
             config_name: ci/ios_release_extension_safe
-            os: depot-macos-latest
+            os: macos-latest
 
           # ------------------------- TESTS BUILDS -------------------------
 
           # - name: mac release arm64 tests
-          #  os: depot-macos-latest
+          #  os: macos-latest
           #  config_name: ci/mac_release_arm64_tests
           #- name: mac host debug arm64 tests
-          #  os: depot-macos-latest
+          #  os: macos-latest
           #  config_name: ci/host_debug_arm64_tests
           #- name: mac host profile arm64 tests
-          #  os: depot-macos-latest
+          #  os: macos-latest
           #  config_name: ci/host_profile_arm64_tests
           #- name: mac host release arm64 tests
-          #  os: depot-macos-latest
+          #  os: macos-latest
           #  config_name: ci/host_release_arm64_tests
 
     steps:
@@ -446,7 +446,6 @@ jobs:
           gclient: slim-mac
           config_name: ${{ matrix.config_name }}
           engine_version: $${ github.sha }}
-
 
 
   #build-engine-windows:
@@ -477,7 +476,7 @@ jobs:
 
   build-ios-release:
     needs: build-engine-ios
-    runs-on: depot-ubuntu-22.04-4
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
