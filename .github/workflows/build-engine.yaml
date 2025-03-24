@@ -52,6 +52,9 @@ jobs:
           #  config_name: web_tests/test_bundles/fallbacks
 
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
       - name: web build
         uses: ./.github/actions/build-engine
         with:
@@ -144,6 +147,9 @@ jobs:
             config_name: ci/android_release_x64
 
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
       - name: android build
         uses: ./.github/actions/build-engine
         with:
@@ -206,6 +212,9 @@ jobs:
             config_name: ci/host_debug_ddm
 
     steps:
+
+      - name: Check out the repository
+        uses: actions/checkout@v4
 
       - name: linux build
         uses: ./.github/actions/build-engine
@@ -338,6 +347,9 @@ jobs:
             os: depot-macos-latest
 
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
       - name: mac build
         uses: ./.github/actions/build-engine
         with:
@@ -420,6 +432,9 @@ jobs:
 
     steps:
 
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
       - name: mac build
         uses: ./.github/actions/build-engine
         with:
@@ -454,7 +469,7 @@ jobs:
   #        config_name: ${{ matrix.config_name }}
   #        engine_version: $${ github.sha }}
 
-  build-release:
+  build-ios-release:
     needs: build-engine-ios
     runs-on: depot-ubuntu-22.04-4
     defaults:
@@ -481,9 +496,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-
-      - name: Check out the repository
-        uses: actions/checkout@v4
 
       - name: Set up depot_tools / gclient
         run: |
